@@ -4,6 +4,7 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -84,8 +85,9 @@ class SelectedCryptsFragment : Fragment() {
             updateData()
         }
 
-        viewModel.selectedCoinsInfoLiveData.observe(viewLifecycleOwner) {
-            adapter.submitList(it)
+        viewModel.selectedCoinsInfoLiveData.observe(viewLifecycleOwner) { list ->
+
+            adapter.submitList(list.sortedByDescending { it.price?.toDouble() })
             if (binding.progressBar.visibility != View.GONE)
                 binding.progressBar.visibility = View.GONE
         }

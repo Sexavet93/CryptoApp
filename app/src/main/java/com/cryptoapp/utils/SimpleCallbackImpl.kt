@@ -13,6 +13,5 @@ abstract class SimpleCallbackImpl: ItemTouchHelper.SimpleCallback(0, ItemTouchHe
     }
 
     override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-        TODO("Not yet implemented")
     }
 }
