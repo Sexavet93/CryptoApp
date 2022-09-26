@@ -5,6 +5,16 @@
     android:layout_height="match_parent"
     tools:context=".fragments.CryptoListFragment">
 
+    <TextView
+        android:id="@+id/defaultText"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:visibility="gone"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycleView"
         android:layout_width="match_parent"

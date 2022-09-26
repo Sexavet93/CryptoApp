@@ -82,14 +82,30 @@ class SelectedCryptsFragment : Fragment() {
             selectedCoinList.clear()
             selectedCoinList.addAll(it)
             viewModel.getCoinInfo(it)
-            updateData()
+            if(it.isEmpty()){
+                binding.apply {
+                    progressBar.visibility = View.GONE
+                    defaultText.text = getString(R.string.choose_a_coin_to_track)
+                    defaultText.visibility = View.VISIBLE
+                }
+            } else {
+                updateData()
+                binding.defaultText.visibility = View.GONE
+            }
         }
 
         viewModel.selectedCoinsInfoLiveData.observe(viewLifecycleOwner) { list ->
-
-            adapter.submitList(list.sortedByDescending { it.price?.toDouble() })
-            if (binding.progressBar.visibility != View.GONE)
+            if(list.isEmpty()){
+                binding.apply {
+                    progressBar.visibility = View.GONE
+                    defaultText.text = getString(R.string.no_data)
+                    defaultText.visibility = View.VISIBLE
+                }
+            } else {
                 binding.progressBar.visibility = View.GONE
+                binding.defaultText.visibility = View.GONE
+                adapter.submitList(list.sortedByDescending { it.price?.toDouble() })
+            }
         }
     }
 
